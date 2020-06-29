@@ -1,0 +1,28 @@
+{
+  "name": "electronapp",
+  "version": "1.0.0",
+  "description": "App for managing properties",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron ./src",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "https://github.com/DavidLeDuy/ProperProperties",
+  "keywords": [
+    "electron",
+    "properties",
+    "css",
+    "html",
+    "js"
+  ],
+  "author": "Kurt Azad, David Le Duy, Lindner Sascha, Temiz Ekrem, Zauner Sascha",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^9.0.5",
+    "electron-builder": "^22.7.0"
+  },
+  "dependencies": {
+    "electron": "^9.0.5",
+    "yarn": "^1.22.4"
+  }
+}
