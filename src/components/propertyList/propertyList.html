@@ -2,26 +2,22 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Hello World!</title>
+    <title>ProperProperties</title>
     <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
     <link rel="stylesheet" type="text/css" href="../../../node_modules/materialize-css/dist/css/materialize.min.css" />
   </head>
   <body>
-    <h1>Hello World!</h1>
-    <a class="waves-effect waves-light btn">button</a>
-    We are using node
-    <script>
-      document.write(process.versions.node);
-    </script>
-    , Chrome
-    <script>
-      document.write(process.versions.chrome);
-    </script>
-    , and Electron
-    <script>
-      document.write(process.versions.electron);
-    </script>
+    <nav>
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo">Logo</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li id="unit"><a href="#">Unit</a></li>
+          <li><a href="/src/components/unitList/unitList.html">unitList</a></li>
+        </ul>
+      </div>
+    </nav>
     <script type="text/javascript" src="../../../node_modules/materialize-css/dist/js/materialize.min.js"></script>
+    <script src="propertyList.js"></script>
   </body>
 </html>

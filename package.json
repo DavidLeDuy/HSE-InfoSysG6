@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "materialize-css": "^1.0.0-rc.2",
+    "mssql": "^6.2.0",
     "yarn": "^1.22.4"
   }
 }

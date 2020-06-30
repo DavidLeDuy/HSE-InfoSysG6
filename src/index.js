@@ -1,9 +1,11 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron");
 const url = require("url");
 const path = require("path");
+const sql = require("mssql");
+var mainWindow = null;
 
 function createWindow() {
-  let win = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 1920,
     height: 1280,
     webPreferences: {
@@ -11,7 +13,7 @@ function createWindow() {
       nodeIntegrationInWorker: true,
     },
   });
-  win.loadFile("components/propertyList/propertyList.html").catch((e) => {
+  mainWindow.loadFile("components/propertyList/propertyList.html").catch((e) => {
     console.log(e);
   });
 }
@@ -27,3 +29,37 @@ app.on("activate", () => {
     createWindow();
   }
 });
+
+/*
+ipcMain.on("changeWindow", (e, args) => {
+  console.log("changeW");
+  mainWindow.loadFile("components/unit/unit.html").catch((e) => {
+    console.log(e);
+  });
+});
+*/
+/*
+const config = {
+  user: "wkb6",
+  password: "wkb6",
+  server: "134.108.190.89", // You can use 'localhost\\instance' to connect to named instance
+  database: "Infosys",
+};
+
+sql.on("error", (err) => {
+  // ... error handler
+});
+
+sql
+  .connect(config)
+  .then((pool) => {
+    // Query
+    return pool.request().query("select * from position");
+  })
+  .then((result) => {
+    console.dir(result);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+*/
