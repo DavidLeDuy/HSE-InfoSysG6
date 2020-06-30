@@ -1,0 +1,26 @@
+:root {
+  --main: #071e3d;
+  --second: #3d5af1;
+  --accent: #21e6c1;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--main);
+}
+nav {
+  background-color: white;
+}
+nav a {
+  color: black !important;
+}
+.collection .collection-item {
+  background-color: transparent;
+}
+table {
+  background-color: white;
+}
+.testing {
+  margin: 2rem;
+}
