@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require("electron");
+const { app, BrowserWindow, ipcMain, webContents } = require("electron");
 const url = require("url");
 const path = require("path");
 const sql = require("mssql");
@@ -16,6 +16,7 @@ function createWindow() {
   mainWindow.loadFile("components/propertyList/propertyList.html").catch((e) => {
     console.log(e);
   });
+  //mainWindow.removeMenu();
 }
 app.whenReady().then(createWindow);
 
@@ -30,14 +31,17 @@ app.on("activate", () => {
   }
 });
 
-/*
 ipcMain.on("changeWindow", (e, args) => {
-  console.log("changeW");
-  mainWindow.loadFile("components/unit/unit.html").catch((e) => {
-    console.log(e);
-  });
+  mainWindow
+    .loadFile("components/" + args + "/" + args + ".html")
+    .then((e) => {
+      console.log(e);
+    })
+    .catch((e) => {
+      console.log(e);
+    });
 });
-*/
+
 /*
 const config = {
   user: "wkb6",
