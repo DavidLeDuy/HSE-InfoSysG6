@@ -8,7 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "_moduleAliases": {
-    "@components": "src/components"
+    "@components": "src/components",
+    "@js": "src/js"
   },
   "repository": "https://github.com/DavidLeDuy/ProperProperties",
   "keywords": [

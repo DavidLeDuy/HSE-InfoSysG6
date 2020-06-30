@@ -11,7 +11,7 @@ function createWindow() {
       nodeIntegrationInWorker: true,
     },
   });
-  win.loadFile("components/propertyList/index.html").catch((e) => {
+  win.loadFile("components/propertyList/propertyList.html").catch((e) => {
     console.log(e);
   });
 }
