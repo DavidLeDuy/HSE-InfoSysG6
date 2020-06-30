@@ -26,6 +26,7 @@
     "electron-builder": "^22.7.0"
   },
   "dependencies": {
+    "jquery": "^3.5.1",
     "materialize-css": "^1.0.0-rc.2",
     "mssql": "^6.2.0",
     "yarn": "^1.22.4"
