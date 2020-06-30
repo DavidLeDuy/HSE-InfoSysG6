@@ -4,13 +4,12 @@
     <meta charset="UTF-8" />
     <title>Hello World!</title>
     <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="script-src 'self' 'unsafe-inline';"
-    />
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <link rel="stylesheet" type="text/css" href="../../../node_modules/materialize-css/dist/css/materialize.min.css" />
   </head>
   <body>
     <h1>Hello World!</h1>
+    <a class="waves-effect waves-light btn">button</a>
     We are using node
     <script>
       document.write(process.versions.node);
@@ -23,6 +22,6 @@
     <script>
       document.write(process.versions.electron);
     </script>
-    .
+    <script type="text/javascript" src="../../../node_modules/materialize-css/dist/js/materialize.min.js"></script>
   </body>
 </html>
