@@ -1,8 +1,12 @@
 const { ipcRenderer } = require("electron");
+const $ = require("jquery");
 
-var unit = document.getElementById("unit");
-unit.addEventListener("click", changeWindow());
-function changeWindow() {
-  console.log("ok");
-  ipcRenderer.send("changeWindow", "to whatever is clicked");
+function changeWindow(wndw) {
+  console.log("wndw");
+  ipcRenderer.send("changeWindow", wndw);
 }
+
+function toggleBtn() {
+  $("#scale").toggleClass("scale-out");
+}
+// script to input the data for properties

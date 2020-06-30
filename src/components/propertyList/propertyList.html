@@ -6,17 +6,41 @@
     <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
     <link rel="stylesheet" type="text/css" href="../../../node_modules/materialize-css/dist/css/materialize.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/style.css" />
   </head>
   <body>
     <nav>
       <div class="nav-wrapper">
-        <a href="#" class="brand-logo">Logo</a>
+        <a href="#"><img src="../../assets/logo_pp_short.png" alt="" srcset="" /></a>
+        <a href="#" class="brand-logo center">Managed Properties</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li id="unit"><a href="#">Unit</a></li>
-          <li><a href="/src/components/unitList/unitList.html">unitList</a></li>
+          <li class="active" onclick="changeWindow('propertyList')"><a href="#">propertyList</a></li>
+          <li onclick="changeWindow('unitList')"><a href="#">unitList</a></li>
+          <li onclick="changeWindow('unit')"><a href="#">Unit</a></li>
         </ul>
       </div>
     </nav>
+
+    <div class="row">
+      <div class="col s12 m6 l3">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text">
+            <span class="card-title">Property Number: 55</span>
+            <ul class="collection">
+              <li class="collection-item">Adress: <span class="right">73728 Street</span></li>
+              <li class="collection-item">Owner: <span class="right">Alvin</span></li>
+              <li class="collection-item">Units: <span class="right">456</span></li>
+              <li class="collection-item">Tenants: <span class="right">666</span></li>
+            </ul>
+          </div>
+          <div class="card-action">
+            <a id="scale" class="btn-small scale-transition" onclick="toggleBtn();changeWindow('unitList')" href="#"
+              >Go to Overview</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
     <script type="text/javascript" src="../../../node_modules/materialize-css/dist/js/materialize.min.js"></script>
     <script src="propertyList.js"></script>
   </body>
