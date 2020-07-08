@@ -5,25 +5,15 @@ sql.on("error", (err) => {
   // ... error handler
 });
 
-exports.getPropertyList = () => {
-  var res;
-  console.log("starting sql ding");
-  sql
-    .connect(config)
-    .then((pool) => {
-      // Query
-      return pool.request().query("SELECT * FROM group6_ProperyList");
-    })
-    .then((result) => {
-      console.log("okay erfolgreich");
-      res = result;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  console.log("returning");
-  return res;
-};
+// funktion die einen promise zurückgibt
+function getPropertyList() {
+  return sql.connect(config).then((pool) => {
+    // Query
+    return pool.request().query("SELECT * FROM group6_ProperyList");
+  });
+}
+
+module.exports.getPropertyList = getPropertyList;
 
 /*
 function InsertTenant(unitNo, firstname, lastname, phoneNo, bankDetails) {
