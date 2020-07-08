@@ -42,7 +42,6 @@ ipcMain.on("changeWindow", (e, args) => {
     });
 });
 
-/*
 const config = {
   user: "wkb6",
   password: "wkb6",
@@ -58,7 +57,7 @@ sql
   .connect(config)
   .then((pool) => {
     // Query
-    return pool.request().query("select * from position");
+    return pool.request().query("select * from [db_owner].[Tables.SS20G6_Transaction]");
   })
   .then((result) => {
     console.dir(result);
@@ -66,4 +65,3 @@ sql
   .catch((err) => {
     console.log(err);
   });
-*/

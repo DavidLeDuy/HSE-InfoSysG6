@@ -20,6 +20,98 @@
         </ul>
       </div>
     </nav>
+    <div class="container" style="margin-top: 2rem;">
+      <div class="row">
+        <div class="col s12">
+          <div class="section">
+            <h5>Unit Adress | Number</h5>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="row">
+        <div class="col s3">Cold Rent</div>
+        <div class="col s3">Adv. Payment</div>
+        <div class="col s3">Rooms</div>
+        <div class="col s3">Square Meter</div>
+      </div>
+      <div class="row">
+        <div class="col s3">477</div>
+        <div class="col s3">666</div>
+        <div class="col s3">3</div>
+        <div class="col s3">128</div>
+      </div>
+      <div class="divider"></div>
+      <div class="row">
+        <div class="col s12">
+          <div class="section">
+            <h5>Tenants</h5>
+          </div>
+        </div>
+      </div>
+      <table id="unitList" class="striped highlight">
+        <thead>
+          <tr>
+            <th>Nr.</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Phone Nr</th>
+            <th>Bank Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Gordon</td>
+            <td>Ramsay</td>
+            <td>049727795843</td>
+            <td>1234-5467-2345-4557-22</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Tim</td>
+            <td>Cook</td>
+            <td>049727795843</td>
+            <td>1234-5467-2345-4557-22</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="row">
+        <form class="col s12" action="">
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="first_name" type="text" class="validate" />
+              <label for="first_name">First Name</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="last_name" type="text" class="validate" />
+              <label for="last_name">Last Name</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="first_name" type="tel" class="validate" />
+              <label for="first_name">Phone Number</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="last_name" type="number" class="validate" />
+              <label for="last_name">IBAN</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="first_name" type="number" class="validate" />
+              <label for="first_name">Unit Number</label>
+            </div>
+            <div class="input-field col s6">
+              <button class="btn">ADD</button>
+              <button class="btn">EDIT</button>
+              <button class="btn">REMOVE</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
 
     <script type="text/javascript" src="../../../node_modules/materialize-css/dist/js/materialize.min.js"></script>
     <script src="unit.js"></script>
