@@ -1,7 +1,8 @@
 const { app, BrowserWindow, ipcMain, webContents } = require("electron");
 const url = require("url");
 const path = require("path");
-const sql = require("mssql");
+
+const { getPropertyList } = require("./js/DBFunctions.js");
 var mainWindow = null;
 
 function createWindow() {
@@ -41,27 +42,3 @@ ipcMain.on("changeWindow", (e, args) => {
       console.log(e);
     });
 });
-
-const config = {
-  user: "wkb6",
-  password: "wkb6",
-  server: "134.108.190.89", // You can use 'localhost\\instance' to connect to named instance
-  database: "Infosys",
-};
-
-sql.on("error", (err) => {
-  // ... error handler
-});
-
-sql
-  .connect(config)
-  .then((pool) => {
-    // Query
-    return pool.request().query("select * from [db_owner].[Tables.SS20G6_Transaction]");
-  })
-  .then((result) => {
-    console.dir(result);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
