@@ -5,60 +5,40 @@ sql.on("error", (err) => {
   // ... error handler
 });
 
-// funktion die einen promise zurückgibt
+
 function getPropertyList() {
   return sql.connect(config).then((pool) => {
-    // Query
-    return pool.request().query("SELECT * FROM group6_ProperyList");
-  });
+      // Query
+      return pool.request().query("SELECT * FROM group6_ProperyList");
+    });
 }
 
-module.exports.getPropertyList = getPropertyList;
 
-/*
+
 function InsertTenant(unitNo, firstname, lastname, phoneNo, bankDetails) {
-  sql.connect(config, (err) => {
+  console.log('afsadf')
+  return sql.connect(config, (err) => {
     new sql.Request()
       .input("unitNo", sql.Int, unitNo)
       .input("firstname", sql.VarChar(12), firstname)
       .input("lastname", sql.VarChar(12), lastname)
       .input("phoneNo", sql.VarChar(11), phoneNo)
       .input("bankDetails", sql.VarChar(16), bankDetails)
-      .execute("group6_InsertTenant2", (err, result) => {
-        // ... error checks
-
-        console.dir(result);
-        console.log(result);
-      });
-  });
-
-  sql.on("error", (err) => {
-    // ... error handler
-  });
+      .execute("group6_InsertTenant2")});
 }
 
 //ModifyTenant(100000010, 'Jensi', 'Spahni', '0000000', '-5555555')
 
 // Modify tenants data (without address, balance)
 function ModifyTenant(tenantNo, firstname, lastname, phoneNo, bankDetails) {
-  sql.connect(config, (err) => {
+  return sql.connect(config, (err) => {
     new sql.Request()
       .input("tenantNo", sql.Int, tenantNo)
       .input("firstname", sql.VarChar(12), firstname)
       .input("lastname", sql.VarChar(12), lastname)
       .input("phoneNo", sql.VarChar(11), phoneNo)
       .input("bankDetails", sql.VarChar(16), bankDetails)
-      .execute("group6_ModifyTenant", (err, result) => {
-        // ... error checks
-
-        console.dir(result);
-        console.log(result);
-      });
-  });
-
-  sql.on("error", (err) => {
-    // ... error handler
-  });
+      .execute("group6_ModifyTenant")});
 }
 
 //DeleteTenant(100000010)
@@ -150,4 +130,6 @@ function getTenantWithNegativeBalance() {
       console.log(err);
     });
 }
-*/
+
+module.exports.getPropertyList = getPropertyList;
+module.exports.InsertTenant = InsertTenant;
