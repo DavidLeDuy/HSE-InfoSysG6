@@ -46,12 +46,15 @@ function InsertTransaction(dateOfTransaction, subjectLine, amount) {
       .input("subjectLine", sql.VarChar(50), subjectLine)
       .input("amount", sql.Float, amount)
       .execute("SS20G6_insertTransaction")});
-}
 
 
-function CalculateOperationalCosts() {
+
+function CalculateOperationalCosts(unitNo, propertyNo) {
   return sql.connect(config, (err) => {
-    new sql.Request().execute("SS20G6_calculate_operational_costs")});
+    new sql.Request()
+      .input("unitNo", sql.Int, unitNo)
+      .input("propertyNo", sql.Int, propertyNo)
+      .execute("SS20G6_calculate_operational_costs")});
 }
 
 // --- Selects on Views/Tables ---
