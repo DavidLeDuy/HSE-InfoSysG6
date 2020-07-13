@@ -1,7 +1,13 @@
 const { app, BrowserWindow, ipcMain, webContents } = require("electron");
 const url = require("url");
 const path = require("path");
+
+const db = require("./js/DBFunctions.js");
+
+
 const { getPropertyList } = require("./js/DBFunctions.js");
+const { InsertTenant } = require("./js/DBFunctions.js");
+
 var mainWindow = null;
 
 function createWindow() {
@@ -13,6 +19,8 @@ function createWindow() {
       nodeIntegrationInWorker: true,
     },
   });
+  
+
   mainWindow.loadFile("components/propertyList/propertyList.html").catch((e) => {
     console.log(e);
   });
@@ -30,6 +38,8 @@ app.on("activate", () => {
     createWindow();
   }
 });
+
+InsertTenant(2,'Berlos', 'Koni', '2342134', '1344433')
 
 ipcMain.on("changeWindow", (e, args) => {
   mainWindow

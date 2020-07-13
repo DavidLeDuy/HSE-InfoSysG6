@@ -5,149 +5,104 @@ sql.on("error", (err) => {
   // ... error handler
 });
 
-// funktion die einen promise zurückgibt
-function getPropertyList() {
-  return sql.connect(config).then((pool) => {
-    // Query
-    return pool.request().query("SELECT * FROM group6_ProperyList");
-  });
-}
-
-module.exports.getPropertyList = getPropertyList;
-
-/*
+// --- Stored Procedures ---
 function InsertTenant(unitNo, firstname, lastname, phoneNo, bankDetails) {
-  sql.connect(config, (err) => {
+  return sql.connect(config, (err) => {
     new sql.Request()
       .input("unitNo", sql.Int, unitNo)
       .input("firstname", sql.VarChar(12), firstname)
       .input("lastname", sql.VarChar(12), lastname)
       .input("phoneNo", sql.VarChar(11), phoneNo)
       .input("bankDetails", sql.VarChar(16), bankDetails)
-      .execute("group6_InsertTenant2", (err, result) => {
-        // ... error checks
-
-        console.dir(result);
-        console.log(result);
-      });
-  });
-
-  sql.on("error", (err) => {
-    // ... error handler
-  });
+      .execute("group6_InsertTenant2")});
 }
 
-//ModifyTenant(100000010, 'Jensi', 'Spahni', '0000000', '-5555555')
 
 // Modify tenants data (without address, balance)
 function ModifyTenant(tenantNo, firstname, lastname, phoneNo, bankDetails) {
-  sql.connect(config, (err) => {
+  return sql.connect(config, (err) => {
     new sql.Request()
       .input("tenantNo", sql.Int, tenantNo)
       .input("firstname", sql.VarChar(12), firstname)
       .input("lastname", sql.VarChar(12), lastname)
       .input("phoneNo", sql.VarChar(11), phoneNo)
       .input("bankDetails", sql.VarChar(16), bankDetails)
-      .execute("group6_ModifyTenant", (err, result) => {
-        // ... error checks
-
-        console.dir(result);
-        console.log(result);
-      });
-  });
-
-  sql.on("error", (err) => {
-    // ... error handler
-  });
+      .execute("group6_ModifyTenant")});
 }
-
-//DeleteTenant(100000010)
 
 // Deletes tenant by tenantNo
 function DeleteTenant(tenantNo) {
-  sql.connect(config, (err) => {
-    new sql.Request().input("tenantNo", sql.Int, tenantNo).execute("group6_DeleteTenant", (err, result) => {
-      // ... error checks
-
-      console.dir(result);
-      console.log(result);
-    });
-  });
-
-  sql.on("error", (err) => {
-    // ... error handler
-  });
+  return sql.connect(config, (err) => {
+    new sql.Request()
+      .input("tenantNo", sql.Int, tenantNo)
+      .execute("group6_DeleteTenant")});
 }
 
-getPropertyList();
 
+function InsertTransaction(dateOfTransaction, subjectLine, amount) {
+  return sql.connect(config, (err) => {
+    new sql.Request()
+      .input("dateOfTransaction", sql.Date, dateOfTransaction)
+      .input("subjectLine", sql.VarChar(50), subjectLine)
+      .input("amount", sql.Float, amount)
+      .execute("SS20G6_insertTransaction")});
+
+
+
+function CalculateOperationalCosts(unitNo, propertyNo) {
+  return sql.connect(config, (err) => {
+    new sql.Request()
+      .input("unitNo", sql.Int, unitNo)
+      .input("propertyNo", sql.Int, propertyNo)
+      .execute("SS20G6_calculate_operational_costs")});
+}
+
+// --- Selects on Views/Tables ---
 function getPropertyList() {
-  sql
-    .connect(config)
-    .then((pool) => {
+  return sql.connect(config).then((pool) => {
       // Query
       return pool.request().query("SELECT * FROM group6_ProperyList");
-    })
-    .then((result) => {
-      console.dir(result);
-      console.log("PropertyList\n" + result);
-    })
-    .catch((err) => {
-      console.log(err);
     });
 }
-
-getUnitList();
 
 function getUnitList() {
-  sql
-    .connect(config)
-    .then((pool) => {
+  return sql.connect(config).then((pool) => {
       // Query
       return pool.request().query("SELECT * FROM group6_UnitList");
-    })
-    .then((result) => {
-      console.dir(result);
-      console.log("UnitList\n" + result);
-    })
-    .catch((err) => {
-      console.log(err);
     });
 }
-
-getUnitDetails();
 
 function getUnitDetails() {
-  sql
-    .connect(config)
-    .then((pool) => {
+  return sql.connect(config).then((pool) => {
       // Query
       return pool.request().query("SELECT * FROM group6_UnitDetails");
-    })
-    .then((result) => {
-      console.dir(result);
-      console.log("UnitDetails" + result);
-    })
-    .catch((err) => {
-      console.log(err);
     });
 }
-
-getTenantWithNegativeBalance();
 
 function getTenantWithNegativeBalance() {
-  sql
-    .connect(config)
-    .then((pool) => {
+  return sql.connect(config).then((pool) => {
       // Query
       return pool.request().query("SELECT * FROM group6_NegativeBalance");
-    })
-    .then((result) => {
-      console.dir(result);
-      console.log("TenantWithNegativeBalance" + result);
-    })
-    .catch((err) => {
-      console.log(err);
     });
 }
-*/
+
+function CalculateOperational() {
+  return sql.connect(config).then((pool) => {
+      // Query
+      return pool.request().query("SELECT * FROM OPERATIONAL_CALCULATE");
+    });
+}
+
+module.exports.InsertTenant = InsertTenant;
+module.exports.ModifyTenant = ModifyTenant;
+module.exports.DeleteTenant = DeleteTenant;
+
+module.exports.InsertTransaction = InsertTransaction;
+module.exports.CalculateOperationalCosts = CalculateOperationalCosts;
+
+module.exports.getPropertyList = getPropertyList;
+module.exports.getUnitList = getUnitList;
+module.exports.getUnitDetails = getUnitDetails;
+
+module.exports.getTenantWithNegativeBalance = getTenantWithNegativeBalance;
+module.exports.CalculateOperational = CalculateOperational;
