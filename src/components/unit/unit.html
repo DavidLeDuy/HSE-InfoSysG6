@@ -24,7 +24,7 @@
       <div class="row">
         <div class="col s12">
           <div class="section">
-            <h5>Unit Adress | Number</h5>
+            <h5>Unit Number | <span id="unitNumberHeader"></span></h5>
           </div>
         </div>
       </div>
@@ -36,11 +36,125 @@
         <div class="col s3">Square Meter</div>
       </div>
       <div class="row">
-        <div class="col s3">477</div>
-        <div class="col s3">666</div>
-        <div class="col s3">3</div>
-        <div class="col s3">128</div>
+        <div class="col s3" id="Rent"></div>
+        <div class="col s3" id="Payment"></div>
+        <div class="col s3" id="Rooms"></div>
+        <div class="col s3" id="Meter"></div>
       </div>
+      <div class="divider"></div>
+      <div class="row">
+        <div class="col s12 center-align">
+          <button id="calcBtn" class="btn" onclick="calcOperationalCosts()">Calculate OP</button>
+        </div>
+      </div>
+      <table id="calcTable" class="hide highlight">
+        <thead>
+          <tr>
+            <th>Konto</th>
+            <th>Verteilung</th>
+            <th>Abrechnungsmenge Gesamt</th>
+            <th>Ausgaben Gesamt</th>
+            <th>Abrechnungsmenge</th>
+            <th>Ausgaben</th>
+          </tr>
+        </thead>
+        <tr>
+          <td>Grundsteuer</td>
+          <td>Wohnfläche</td>
+          <td id="Grundsteuer_Abrechnungsmenge_Property"></td>
+          <td id="Grundsteuer_Ausgaben_Property"></td>
+          <td id="Grundsteuer_Abrechnungsmenge_Unit"></td>
+          <td id="Grundsteuer_Ausgaben_Unit"></td>
+        </tr>
+        <tr>
+          <td>Müllabfuhr</td>
+          <td>Personen</td>
+          <td id="Müllabfuhr_Abrechnungsmenge_Property"></td>
+          <td id="Müllabfuhr_Ausgaben_Property"></td>
+          <td id="Müllabfuhr_Abrechnungsmenge_Unit"></td>
+          <td id="Müllabfuhr_Ausgaben_Unit"></td>
+        </tr>
+        <tr>
+          <td>Niedeschlagswasssergebühr</td>
+          <td>Wohnfläche</td>
+          <td id="Niederschlagswassergeb_Abrechnungsmenge_Property"></td>
+          <td id="Niederschlagswassergeb_Ausgaben_Property"></td>
+          <td id="Niederschlagswassergeb_Abrechnungsmenge_Unit"></td>
+          <td id="Niederschlagswassergeb_Ausgaben_Unit"></td>
+        </tr>
+        <tr>
+          <td>Handwerkerleistungen</td>
+          <td>Wohnungen</td>
+          <td id="Schornsteinfeger_Abrechnungsmenge_Property"></td>
+          <td id="Schornsteinfeger_Ausgaben_Property"></td>
+          <td id="Schornsteinfeger_Abrechnungsmenge_Unit"></td>
+          <td id="Schornsteinfeger_Ausgaben_Unit"></td>
+        </tr>
+        <tr>
+          <td>Gebäudeversicherung</td>
+          <td>Wohnfläche</td>
+          <td id="Gebäudebrandversicherung_Abrechnungsmenge_Property"></td>
+          <td id="Gebäudebrandversicherung_Ausgaben_Property"></td>
+          <td id="Gebäudebrandversicherung_Abrechnungsmenge_Unit"></td>
+          <td id="Gebäudebrandversicherung_Ausgaben_Unit"></td>
+        </tr>
+        <tr>
+          <td>Leitungswasserversicherung</td>
+          <td>Wohnfläche</td>
+          <td id="Leitungswasserversicherung_Abrechnungsmenge_Property"></td>
+          <td id="Leitungswasserversicherung_Ausgaben_Property"></td>
+          <td id="Leitungswasserversicherung_Abrechnungsmenge_Unit"></td>
+          <td id="Leitungswasserversicherung_Ausgaben_Unit"></td>
+        </tr>
+        <tr>
+          <td>Haushaftpflichtversicherung</td>
+          <td>Wohnfläche</td>
+          <td id="Haushaftpflichtversicherung_Abrechnungsmenge_Property"></td>
+          <td id="Haushaftpflichtversicherung_Ausgaben_Property"></td>
+          <td id="Haushaftpflichtversicherung_Abrechnungsmenge_Unit"></td>
+          <td id="Haushaftpflichtversicherung_Ausgaben_Unit"></td>
+        </tr>
+        <tr>
+          <td>Wasser + Abwasser</td>
+          <td>Personen</td>
+          <td id="WasserUndSchmutzwasser_Abrechnungsmenge_Property"></td>
+          <td id="WasserUndSchmutzwasser_Ausgaben_Property"></td>
+          <td id="WasserUndSchmutzwasser_Abrechnungsmenge_Unit"></td>
+          <td id="WasserUndSchmutzwasser_Ausgaben_Unit"></td>
+        </tr>
+        <tr>
+          <td>Strom</td>
+          <td>Personen</td>
+          <td id="StromTreppenhaus_Abrechnungsmenge_Property"></td>
+          <td id="StromTreppenhaus_Ausgaben_Property"></td>
+          <td id="StromTreppenhaus_Abrechnungsmenge_Unit"></td>
+          <td id="StromTreppenhaus_Ausgaben_Unit"></td>
+        </tr>
+        <tr style="border-top: 3px solid gray;">
+          <td>Ausgabe Gesamt</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td id="EndsummeOhneBKVZ"></td>
+        </tr>
+        <tr>
+          <td>abzgl. Vorauszahlung Gesamt</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td id="BetriebskostenVZ"></td>
+        </tr>
+        <tr style="border-bottom: 3px solid gray;">
+          <td>Nachzahlung/Rückzahlung</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td id="Endsumme"></td>
+        </tr>
+      </table>
       <div class="divider"></div>
       <div class="row">
         <div class="col s12">
@@ -49,64 +163,50 @@
           </div>
         </div>
       </div>
-      <table id="unitList" class="striped highlight">
+      <table class="striped highlight">
         <thead>
           <tr>
-            <th>Nr.</th>
+            <th>No.</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Phone Nr</th>
             <th>Bank Details</th>
+            <th>Balance</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Gordon</td>
-            <td>Ramsay</td>
-            <td>049727795843</td>
-            <td>1234-5467-2345-4557-22</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Tim</td>
-            <td>Cook</td>
-            <td>049727795843</td>
-            <td>1234-5467-2345-4557-22</td>
-          </tr>
-        </tbody>
+        <tbody id="unitList"></tbody>
       </table>
       <div class="row">
-        <form class="col s12" action="">
+        <form id="form" class="col s12" action="">
           <div class="row">
             <div class="input-field col s6">
-              <input id="first_name" type="text" class="validate" />
-              <label for="first_name">First Name</label>
+              <input id="firstName" type="text" class="validate" required />
+              <label for="firstName">First Name</label>
             </div>
             <div class="input-field col s6">
-              <input id="last_name" type="text" class="validate" />
-              <label for="last_name">Last Name</label>
+              <input id="lastName" type="text" class="validate" required />
+              <label for="lastName">Last Name</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s6">
-              <input id="first_name" type="tel" class="validate" />
-              <label for="first_name">Phone Number</label>
+              <input id="phoneNo" type="tel" class="validate" />
+              <label for="phoneNo">Phone Number</label>
             </div>
             <div class="input-field col s6">
-              <input id="last_name" type="number" class="validate" />
-              <label for="last_name">IBAN</label>
+              <input id="bankDetails" type="number" class="validate" />
+              <label for="bankDetails">IBAN</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s6">
-              <input id="first_name" type="number" class="validate" />
-              <label for="first_name">Unit Number</label>
+              <input id="tenantNo" type="number" class="validate" />
+              <label for="tenantNo">Tenant Number</label>
             </div>
             <div class="input-field col s6">
-              <button class="btn">ADD</button>
-              <button class="btn">EDIT</button>
-              <button class="btn">REMOVE</button>
+              <button class="btn" onclick="addT()">ADD</button>
+              <button class="btn" onclick="modifyT()">EDIT</button>
+              <button class="btn" onclick="deleteT()">REMOVE</button>
             </div>
           </div>
         </form>

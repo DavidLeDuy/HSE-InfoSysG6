@@ -1,14 +1,5 @@
 const { ipcRenderer } = require("electron");
 const $ = require("jquery");
-const { getPropertyList } = require("../../js/DBFunctions.js");
-const { exists } = require("fs");
-const { create } = require("domain");
-//import { config } from "./config.js";
-
-function changeWindow(wndw) {
-  console.log("wndw");
-  ipcRenderer.send("changeWindow", wndw);
-}
 
 function toggleBtn() {
   $("#scale").toggleClass("scale-out");
@@ -28,59 +19,51 @@ function createCard(property) {
       "</ul>" +
       "</div>" +
       '<div class="card-action">' +
-      `<a id="scale" class="btn-small scale-transition" onclick="toggleBtn();changeWindow('unitList')" href="#">Go to Overview</a>` +
+      `<a id="scale" class="btn-small scale-transition" onclick="toggleBtn();switchUnitList(${property.propertyNo})" href="#">Go to Overview</a>` +
       "</div>" +
       "</div>" +
       "</div>"
   );
 }
 
-// script to input the data for properties
+// loads data after DOM objects have been initalized
 $(document).ready(function () {
-  for (let index = 0; index < testJSON.recordset.length; index++) {
-    createCard(testJSON.recordset[index]);
-  }
-  getPropertyList()
-    .then((propertylist) => {
-      console.dir(propertylist);
-      for (let index = 0; index < propertylist.recordset.length; index++) {
-        createCard(propertylist.recordset[index]);
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  getPL();
 });
 
-var testJSON = {
-  recordsets: [[[Object], [Object]]],
-  recordset: [
-    {
-      propertyNo: 2,
-      addressNo: 1000000001,
-      houseNo: 32,
-      street: "Amselweg",
-      postCode: 67890,
-      city: "Göppingen",
-      firstName: "Sabine",
-      lastName: "Müller",
-      phoneNo: "01578888",
-      numberOfUnits: 12,
-      numberOfTenants: 3,
-    },
-    {
-      propertyNo: 111,
-      addressNo: 999999999,
-      houseNo: 11,
-      street: "Landauerstr",
-      postCode: 70499,
-      city: "Stuttgart-Weilimdorf",
-      firstName: "Ekrem",
-      phoneNo: "01234567",
-      numberOfUnits: 3,
-      numberOfTenants: 3,
-    },
-  ],
-  output: {},
-  rowsAffected: [2],
-};
+//
+// ────────────────────────────────────────────────────────────────── I ──────────
+//   :::::: I P C   F U N C T I O N S : :  :   :    :     :        :          :
+// ────────────────────────────────────────────────────────────────────────────
+//
+
+//
+// ─── GENERIC CHANGE WINDOW ──────────────────────────────────────────────────────
+//
+
+function changeWindow(wndw) {
+  console.log("wndw");
+  ipcRenderer.send("changeWindow", wndw);
+}
+//
+// ─── SWITCH TO UNITLIST AND SET PROPERTYNO ──────────────────────────────────────
+//
+function switchUnitList(propertyNo) {
+  ipcRenderer.send("switchUnitList", propertyNo);
+}
+//
+// ─── GET PROPERTY LIST ──────────────────────────────────────────────────────────
+//
+
+function getPL() {
+  ipcRenderer.send("getPropertyList");
+}
+ipcRenderer.on("sendPropertyList", (event, args) => {
+  // check if error occured
+  if (args == -1) {
+    return;
+  }
+  for (let index = 0; index < args.recordset.length; index++) {
+    createCard(args.recordset[index]);
+  }
+});
