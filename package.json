@@ -2,7 +2,7 @@
   "name": "properproperties",
   "version": "1.0.0",
   "description": "App for managing properties",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "start": "electron ./src",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,9 +13,7 @@
     "productName": "Proper Properties",
     "target": "NSIS",
     "files": [
-      "src/*",
-      "src/index.js",
-      "package.json"
+      "src/**/*"
     ],
     "directories": {
       "output": "dist"
