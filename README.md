@@ -10,15 +10,9 @@ https://nodejs.org/en/download/
 
 ---
 
-## Install yarn
-
-     npm install yarn
-
----
-
 ## Install dependencies
 
-     yarn install
+     npm install
 
 ---
 
