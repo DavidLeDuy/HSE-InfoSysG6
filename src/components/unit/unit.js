@@ -66,7 +66,7 @@ function modifyT() {
   var args = [];
   for (let index = 0; index < 5; index++) {
     if (!form[0][index].value || null) {
-      alert("fehler bei input forms");
+      alert("Please fill out the required fields");
       return;
     }
     args[index] = form[0][index].value;
@@ -78,7 +78,7 @@ function addT() {
   var args = [];
   for (let index = 0; index < 4; index++) {
     if (!form[0][index].value || null) {
-      alert("fehler bei input forms");
+      console.log("fehler bei add value: " + form[0][index].value);
       return;
     }
     args[index] = form[0][index].value;
@@ -89,6 +89,10 @@ function addT() {
 function deleteT() {
   var form = $("#form");
   var tenantNo = form[0][4].value;
+  if (form[0][4].value == 0) {
+    alert("Please check the tenantNo");
+    return;
+  }
   deleteTenant(tenantNo);
 }
 //
