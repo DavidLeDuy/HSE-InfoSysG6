@@ -7,18 +7,22 @@
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
     <link rel="stylesheet" type="text/css" href="../../../node_modules/materialize-css/dist/css/materialize.min.css" />
     <link rel="stylesheet" type="text/css" href="../../css/style.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   </head>
   <body>
     <nav>
       <div class="nav-wrapper">
-        <a href="#" class="brand-logo"
-          ><button class="btn" onclick="closeApp()" style="margin-left: 1rem;">Exit</button></a
-        >
-        <a href="#" class="brand-logo center">Managed Properties</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <a href="#" class="brand-logo center">Managed Properties </a>
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+          <li><img src="../../assets/icon.png" alt="WAAA" height="64px" width="64px" /></li>
           <li class="active" onclick="changeWindow('propertyList')"><a href="#">propertyList</a></li>
           <li onclick="changeWindow('unitList')" class="disabled-nav"><a href="#">unitList</a></li>
           <li onclick="changeWindow('unit')" class="disabled-nav"><a href="#">Unit</a></li>
+        </ul>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li>
+            <a href="#" onclick="closeApp()"><i class="material-icons">exit_to_app</i></a>
+          </li>
         </ul>
       </div>
     </nav>
