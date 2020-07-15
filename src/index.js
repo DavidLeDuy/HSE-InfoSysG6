@@ -24,13 +24,14 @@ function createWindow() {
       nodeIntegration: true,
       nodeIntegrationInWorker: true,
     },
+    icon: path.join(__dirname, "assets/icon2.png"),
   });
 
   mainWindow.loadFile("components/propertyList/propertyList.html").catch((e) => {
     console.log(e);
   });
-  mainWindow.webContents.openDevTools();
-  //mainWindow.removeMenu();
+  //mainWindow.webContents.openDevTools();
+  mainWindow.removeMenu();
 }
 app.whenReady().then(createWindow);
 
