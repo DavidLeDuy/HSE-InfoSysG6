@@ -24,7 +24,7 @@ function createWindow() {
       nodeIntegration: true,
       nodeIntegrationInWorker: true,
     },
-    icon: path.join(__dirname, "assets/icon2.png"),
+    icon: path.join(__dirname, "assets/icon.ico"),
   });
 
   mainWindow.loadFile(path.join(__dirname, "components/propertyList/propertyList.html")).catch((e) => {
