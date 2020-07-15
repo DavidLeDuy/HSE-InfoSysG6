@@ -28,3 +28,16 @@ table {
 .container {
   background-color: white;
 }
+.center-loading {
+  height: 200px;
+  width: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -100px 0 0 -250px;
+}
+.disabled-nav {
+  pointer-events: none;
+  opacity: 0.3;
+  filter: grayscale(100%);
+}

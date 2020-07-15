@@ -11,14 +11,35 @@
   <body>
     <nav>
       <div class="nav-wrapper">
+        <a href="#" class="brand-logo"
+          ><button class="btn" onclick="closeApp()" style="margin-left: 1rem;">Exit</button></a
+        >
         <a href="#" class="brand-logo center">Managed Properties</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li class="active" onclick="changeWindow('propertyList')"><a href="#">propertyList</a></li>
-          <li onclick="changeWindow('unitList')"><a href="#">unitList</a></li>
-          <li onclick="changeWindow('unit')"><a href="#">Unit</a></li>
+          <li onclick="changeWindow('unitList')" class="disabled-nav"><a href="#">unitList</a></li>
+          <li onclick="changeWindow('unit')" class="disabled-nav"><a href="#">Unit</a></li>
         </ul>
       </div>
     </nav>
+    <div id="loading" class="container-overview center-loading">
+      <div class="row center-align"><h3 id="infoText" style="color: whitesmoke;">Connecting to Database</h3></div>
+      <div class="row center-align">
+        <div class="preloader-wrapper big active">
+          <div class="spinner-layer spinner-red-only">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+              <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div id="cardContainer" class="row"></div>
     <script type="text/javascript" src="../../../node_modules/materialize-css/dist/js/materialize.min.js"></script>

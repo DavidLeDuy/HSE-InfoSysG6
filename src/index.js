@@ -27,9 +27,10 @@ function createWindow() {
     icon: path.join(__dirname, "assets/icon2.png"),
   });
 
-  mainWindow.loadFile("components/propertyList/propertyList.html").catch((e) => {
+  mainWindow.loadFile(path.join(__dirname, "components/propertyList/propertyList.html")).catch((e) => {
     console.log(e);
   });
+  mainWindow.setFullScreen(true);
   //mainWindow.webContents.openDevTools();
   mainWindow.removeMenu();
 }
@@ -40,6 +41,7 @@ app.on("window-all-closed", () => {
     app.quit();
   }
 });
+
 app.on("activate", () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow();
@@ -52,12 +54,14 @@ app.on("activate", () => {
 // ──────────────────────────────────────────────────────────────────────────
 //
 function switchWindow(args) {
-  mainWindow.loadFile("components/" + args + "/" + args + ".html");
+  mainWindow.loadFile(path.join(__dirname, "components/" + args + "/" + args + ".html"));
 }
 ipcMain.on("changeWindow", (e, args) => {
   switchWindow(args);
 });
-
+ipcMain.on("closeApp", (e, args) => {
+  app.quit();
+});
 //
 // ─── PROPERY LIST ───────────────────────────────────────────────────────────────
 //
@@ -81,6 +85,7 @@ ipcMain.on("switchUnitList", (e, args) => {
 // ─── UNIT LIST ──────────────────────────────────────────────────────────────────
 //
 ipcMain.on("getUnitList", (e, args) => {
+  if ((propertyNo == 0) | null) e.reply("sendUnitList", -2);
   getUnitList(propertyNo)
     .then((unitList) => {
       e.reply("sendUnitList", unitList);
@@ -99,6 +104,7 @@ ipcMain.on("switchUnit", (e, args) => {
 // ─── UNIT ───────────────────────────────────────────────────────────────────────
 //
 ipcMain.on("getUnitDetails", (e, args) => {
+  if ((unitNo == 0) | null) e.reply("sendUnit", -2);
   getUnitDetails(unitNo)
     .then((unit) => {
       e.reply("sendUnit", unit);

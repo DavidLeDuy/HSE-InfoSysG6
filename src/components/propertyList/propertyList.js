@@ -36,7 +36,10 @@ $(document).ready(function () {
 //   :::::: I P C   F U N C T I O N S : :  :   :    :     :        :          :
 // ────────────────────────────────────────────────────────────────────────────
 //
-
+function closeApp() {
+  console.log("closeApp");
+  ipcRenderer.send("closeApp");
+}
 //
 // ─── GENERIC CHANGE WINDOW ──────────────────────────────────────────────────────
 //
@@ -61,8 +64,12 @@ function getPL() {
 ipcRenderer.on("sendPropertyList", (event, args) => {
   // check if error occured
   if (args == -1) {
+    console.log("err");
+    $("#infoText").text("Database connection failed, check if you are connected to the VPN. Trying again...");
     return;
   }
+  $("#loading").toggleClass("hide");
+  $(".disabled-nav").toggleClass("disabled-nav");
   for (let index = 0; index < args.recordset.length; index++) {
     createCard(args.recordset[index]);
   }

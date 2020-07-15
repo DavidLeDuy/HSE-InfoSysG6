@@ -162,10 +162,20 @@ ipcRenderer.on("operationalCosts", (event, args) => {
 //
 // ─── IPC LISTENER ───────────────────────────────────────────────────────────────
 //
+function closeApp() {
+  ipcRenderer.send("closeApp");
+}
 ipcRenderer.on("sendUnit", (event, args) => {
-  if (args == -1) {
-    console.log("error occured");
-    return;
+  switch (args) {
+    case -1:
+      alert("Database Error");
+      return;
+    case -2:
+      alert("No Unit selected! Go back and select one.");
+      ipcRenderer.send("changeWindow", "unitList");
+      return;
+    default:
+      break;
   }
   // do return value specific stuff
   setUnitInformation(args.recordset[0]);

@@ -26,6 +26,9 @@ function addRow(obj) {
 function clicked() {
   switchUnit(this.cells[0].innerHTML);
 }
+function closeApp() {
+  ipcRenderer.send("closeApp");
+}
 // script to insert table rows depending on output
 $(document).ready(function () {
   getUL();
@@ -53,9 +56,16 @@ function switchUnit(unitNo) {
 // ─── IPC LISTENER ───────────────────────────────────────────────────────────────
 //
 ipcRenderer.on("sendUnitList", (event, args) => {
-  if (args == -1) {
-    console.log("error occured");
-    return;
+  switch (args) {
+    case -1:
+      alert("Database Error");
+      return;
+    case -2:
+      alert("No Property selected! Go back and select one.");
+      ipcRenderer.send("changeWindow", "propertyList");
+      return;
+    default:
+      break;
   }
   for (let index = 0; index < args.recordset.length; index++) {
     addRow(args.recordset[index]);
